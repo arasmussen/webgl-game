@@ -3,10 +3,10 @@ define(['gl', 'ShaderManager', 'TextureManager'], function(gl, ShaderManager, Te
   var pMatrix = mat4.create();
 
   return Base.extend({
-    constructor: function(config) {
-      this.config = config;
+    constructor: function(position) {
       this.buffers = {};
       this.textures = {};
+      this.position = position ? position : [0.0, 0.0, 0.0];
     },
 
     init: function(config) {
@@ -62,15 +62,35 @@ define(['gl', 'ShaderManager', 'TextureManager'], function(gl, ShaderManager, Te
       }
     },
 
+    preDraw: function(camera) {
+      var translate = [
+        -camera.position.x,
+        -camera.position.y,
+        -camera.position.z
+      ];
+      mat4.rotate(mvMatrix, -camera.rotation.pitch, [1, 0, 0]);
+      mat4.rotate(mvMatrix, -camera.rotation.yaw, [0, 1, 0]);
+      mat4.translate(mvMatrix, translate);
+      this.camera = camera;
+    },
+
+    postDraw: function() {
+      var translate = [
+        camera.position.x,
+        camera.position.y,
+        camera.position.z
+      ];
+      mat4.translate(mvMatrix, translate);
+      mat4.rotate(mvMatrix, camera.rotation.yaw, [0, 1, 0]);
+      mat4.rotate(mvMatrix, camera.rotation.pitch, [1, 0, 0]);
+    },
+
     draw: function() {
       gl.useProgram(this.shaderProgram);
 
-      gl.viewport(0, 0, gl.viewportWidth, gl.viewportHeight);
-      gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
-
       mat4.perspective(45, gl.viewportWidth / gl.viewportHeight, 0.1, 100.0, pMatrix);
       mat4.identity(mvMatrix);
-      mat4.translate(mvMatrix, [2.5, -2.5, -10.0]);
+      mat4.translate(mvMatrix, this.position);
 
       gl.bindBuffer(gl.ARRAY_BUFFER, this.buffers['Vertex']);
       gl.vertexAttribPointer(this.shaderProgram.attribs['aVertexPosition'], this.buffers['Vertex'].itemSize, gl.FLOAT, false, 0, 0);

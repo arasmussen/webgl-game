@@ -1,12 +1,11 @@
 define(['Cube'], function(Cube) {
-
   return Base.extend({
     init: function() {
       this.cubes = [];
-      for (var x = 0; x < 8; x++) {
-        for (var y = -10; y < -2; y++) {
-          for (var z = -28; z < -20; z++) {
-            var cube = new Cube([x, y, z]);
+      for (var x = -30; x < 30; x++) {
+        for (var y = -2; y < -1; y++) {
+          for (var z = -30; z < 30; z++) {
+            var cube = new Cube({x: x, y: y, z: z});
             cube.init();
             this.cubes.push(cube);
           }
@@ -14,9 +13,9 @@ define(['Cube'], function(Cube) {
       }
     },
 
-    draw: function() {
-      for (var i = 0; i < 8 * 8 * 8; i++) {
-        this.cubes[i].draw();
+    draw: function(mvMatrix, pMatrix) {
+      for (var i = 0; i < 60 * 60; i++) {
+        this.cubes[i].draw(mvMatrix, pMatrix);
       }
     }
   });

@@ -37,7 +37,6 @@ define(['InputManager', 'InputEventTypes'], function(InputManager, InputEventTyp
     },
 
     onMouseMove: function(mouseMove) {
-      console.log('here');
       // update pitch
       var pitch = this.rotation.pitch - mouseMove.y * 0.004;
       if (pitch > Math.PI / 2) {

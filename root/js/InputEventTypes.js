@@ -1,6 +1,7 @@
 define(function() {
   return {
-    onKeyDown: 0,
-    onKeyUp: 1,
+    onKeyDown: 'onKeyDown',
+    onKeyUp: 'onKeyUp',
+    onMouseMove: 'onMouseMove',
   };
 });

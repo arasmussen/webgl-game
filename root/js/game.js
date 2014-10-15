@@ -1,13 +1,13 @@
 define([
     'gl',
-    'CubeBox',
+    'CubeGrid',
     'ShaderManager',
     'TextureManager',
     'RenderingEngine',
     'InputManager'
   ],
   function(gl,
-           CubeBox,
+           CubeGrid,
            ShaderManager,
            TextureManager,
            RenderingEngine,
@@ -31,14 +31,16 @@ define([
       },
 
       init: function() {
+        var canvas = document.getElementById('canvas');
+
         // initialize the rendering engine
         RenderingEngine.init();
-        InputManager.init();
+        InputManager.init(canvas);
 
         // create a cube box and add it to the rendering engine
-        var cubeBox = new CubeBox();
-        cubeBox.init();
-        RenderingEngine.addEntity(cubeBox);
+        var cubeGrid = new CubeGrid();
+        cubeGrid.init();
+        RenderingEngine.addEntity(cubeGrid);
 
         // start the game loop
         this.startGameLoop();

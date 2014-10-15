@@ -5,7 +5,7 @@ define(['Cube'], function(Cube) {
       for (var x = -10; x < 10; x++) {
         for (var z = -10; z < 10; z++) {
           y = Math.sin(x) + Math.sin(z);
-          var cube = new Cube({x: 1.5 * x, y: y, z: 1.5 * z});
+          var cube = new Cube({x: 2.0 * x, y: y, z: 2.0 * z});
           cube.init();
           this.cubes.push(cube);
         }
@@ -28,7 +28,6 @@ define(['Cube'], function(Cube) {
 
           var cube = this.cubes[i];
           var y = Math.sin(x + this.t) + Math.sin(z + this.t);
-          debugger;
           cube.position = {
             x: cube.position.x,
             y: y,

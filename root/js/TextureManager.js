@@ -1,6 +1,6 @@
 define(['gl', 'Cube'], function(gl, Cube) {
   var textureURLs = {
-    'Grass': '/img/grass.jpg'
+    'Grass': '/img/blue.png'
   };
   var textures = {
   };

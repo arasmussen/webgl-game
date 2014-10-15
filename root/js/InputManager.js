@@ -30,18 +30,36 @@ define(['InputEventTypes'], function(InputEventTypes) {
         this.canvas.requestPointerLock ||
         this.canvas.mozRequestPointerLock ||
         this.canvas.webkitRequestPointerLock;
-      document.onpointerlockchange = this.onPointerLockChange.bind(this);
-      document.onmozpointerlockchange = this.onPointerLockChange.bind(this);
-      document.onwebkitpointerlockchange = this.onPointerLockChange.bind(this);
+      document.addEventListener(
+        'pointerlockchange',
+        this.onPointerLockChange.bind(this)
+      );
+      document.addEventListener(
+        'mozpointerlockchange',
+        this.onPointerLockChange.bind(this)
+      );
+      document.addEventListener(
+        'webkitpointerlockchange',
+        this.onPointerLockChange.bind(this)
+      );
 
       // full screen handler
       this.canvas.requestFullScreen =
         this.canvas.requestFullScreen ||
         this.canvas.mozRequestFullScreen ||
         this.canvas.webkitRequestFullScreen;
-      document.onfullscreenchange = this.onFullScreenChange.bind(this);
-      document.onmozfullscreenchange = this.onFullScreenChange.bind(this);
-      document.onwebkitfullscreenchange = this.onFullScreenChange.bind(this);
+      document.addEventListener(
+        'fullscreenchange',
+        this.onFullScreenChange.bind(this)
+      );
+      document.addEventListener(
+        'mozfullscreenchange',
+        this.onFullScreenChange.bind(this)
+      );
+      document.addEventListener(
+        'webkitfullscreenchange',
+        this.onFullScreenChange.bind(this)
+      );
 
       // setup canvas click handler
       this.canvas.onclick = this.onCanvasClicked.bind(this);

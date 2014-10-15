@@ -38,9 +38,9 @@ define([
         InputManager.init(canvas);
 
         // create a cube box and add it to the rendering engine
-        var cubeGrid = new CubeGrid();
-        cubeGrid.init();
-        RenderingEngine.addEntity(cubeGrid);
+        this.cubeGrid = new CubeGrid();
+        this.cubeGrid.init();
+        RenderingEngine.addEntity(this.cubeGrid);
 
         // start the game loop
         this.startGameLoop();
@@ -63,6 +63,7 @@ define([
 
       updateWorld: function() {
         var tslf = 0.016;
+        this.cubeGrid.move(tslf);
         RenderingEngine.update(tslf);
       },
 
